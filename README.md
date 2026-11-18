@@ -21,6 +21,21 @@ npm start        # node server.js
 ```
 Open the printed URL (LAN links print for friends on the same network). Mobile supported.
 
+## Deploy
+The server is one Node process with in-memory world state. Run a single instance and send
+WebSocket traffic to that same instance — no sticky sessions or external database are needed.
+
+```
+docker build -t lights-out .
+docker run --rm -p 8787:8787 -e ORIGINS=https://your-domain.example lights-out
+```
+
+Set `PORT` when your host assigns one (Render, Railway, Fly, and most PaaS providers do). Set
+`ORIGINS` to the exact public origin, comma-separated for several; an unset value only works for
+same-host development, so a public deployment without it will reject its own WebSocket upgrade.
+Terminate TLS at the platform and point the platform health check at `/healthz`. The container
+listens on 8787 by default and needs no build step beyond the image.
+
 ## The Twelve — pick your sin
 | class | icon | play |
 |---|---|---|
@@ -68,20 +83,23 @@ It returns to its cage after a minute.
   Stand in one to collect it; a slow bell plays and the memory opens. Memories are collected
   **per player**: the fragment stays in the street for everyone else, and the server tracks each
   walker's own set for the session. Bots can't carry them. All ten texts live only in
-  `server.js → LORE`, served via `/classes.json`.
+  `server.js → LORE`, served via `/classes.json`. Press **C** to open the **Codex**; all ten
+  collected fragments reveal the Final Truth. Refresh or reconnect within two minutes and the
+  server resumes the same walker from a session token.
 - **Atmosphere**: fireflies brighten when *you* go dark, a sparse ambient score (drone pad + far
   bells), biome-specific fog and ground cover, and the mask cracks when you die. Separate effects,
   music, and ambience sliders are available in the audio menu.
 - **Exploration**: streamed, seeded terrain has no arena boundary. The minimap follows you, the
   biome name changes as you travel, and newly explored regions receive amber caches.
 - **Stuns**: Petra's drum pulse stuns everything within 7m for 0.8s.
-- **Lobby**: server keeps 8 players; bots fill in and get *real* classes. Bots seek amber, flee the
+- **Lobby**: bots fill the street to eight walkers (up to 12 humans can join) and get *real* classes. Bots seek amber, flee the
 dark **and the bosses**, ambush confident humans, lay bait, and bold bots (high skill) trade arrows
 with awakened bosses.
 
 ## Controls
 Desktop defaults: WASD move · mouse aim · **SPACE** attack (targets the nearest opponent in the
-aimed direction — melee only lands in the dark) · **Q** bait · **F** focus · **LEFT SHIFT** run.
+aimed direction — melee only lands in the dark) · **Q** bait · **F** focus · **C** codex ·
+**LEFT SHIFT** run.
 The match uses an orthographic, follow-camera view for top-down play. Open **Settings** to remap
 each action, adjust camera zoom and render scale, enable reduced motion, or tune separate effects,
 music, and ambience levels. Settings persist in this browser. Mobile: left virtual joystick ·
@@ -112,15 +130,17 @@ the dark-only kill predicate, melee/ranged/bot kill paths, per-class movement sp
 multiplier, death-streak reset, per-player memories, boss leashing, and server integration for
 heartbeat/pong survival, movement flooding, rate limiting, oversize payloads, malformed JSON, the
 origin allowlist, join timeout, the per-IP cap, AFK removal, debug gating, security headers, MIME
-types, and `/classes.json` ETag caching.
+types, `/classes.json` ETag caching, resume-token reconnections, aggregate telemetry, and the
+Gravedigger/Lamp-Monk/Ember-Drum/Lantern-Keeper class traits.
 
 ## Operations
 Environment: `PORT` (default 8787), `ORIGINS` (comma-separated WebSocket origin allowlist; unset
 allows same-host development), `LIGHTS_OUT_DEBUG=1` (enables debug messages), `MAX_HUMANS` (12),
-`HEARTBEAT_MS` (15000), `AFK_MS` (60000), `MAX_CONNECTIONS_PER_IP` (3).
+`HEARTBEAT_MS` (15000), `AFK_MS` (60000), `RESUME_TTL_MS` (120000), `MAX_CONNECTIONS_PER_IP` (3).
 
-`GET /healthz` returns liveness, `GET /status` returns connected humans, awake bosses, and rolling
-tick p95, and `GET /classes.json` carries an ETag and `no-cache`. The WebSocket server enforces a
+`GET /healthz` returns liveness, `GET /status` returns connected humans, awake bosses, rolling
+tick p95, and aggregate telemetry (sessions, deaths by cause, first kills, boss kills, memories,
+average session length), and `GET /classes.json` carries an ETag and `no-cache`. The WebSocket server enforces a
 1 KiB payload cap, per-type schema validation, a per-socket message budget, a 5 s join timeout, and
 an origin allowlist. Responses carry CSP (`script-src 'self'`), `X-Content-Type-Options: nosniff`,
 and `Referrer-Policy: no-referrer`. Static files use a byte-bounded cache; binary assets are

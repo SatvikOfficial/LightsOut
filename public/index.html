@@ -91,6 +91,7 @@
   .asset-credits a { color:#c5a879; }
   .howto { display:flex; flex-wrap:wrap; gap:6px 14px; font-size:9.5px; color:var(--dim); letter-spacing:0.5px; }
   .howto b { color:#aeb6cc; font-weight:normal; }
+  .howto + .howto { margin-top:8px; }
   /* ================= HUD ================= */
   .hud { display:none; position:fixed; inset:0; z-index:10; pointer-events:none; }
   #cross { position:absolute; left:50%; top:50%; width:16px; height:16px; transform:translate(-50%,-50%); opacity:0.85; }
@@ -179,6 +180,49 @@
   #settings-status { min-height:14px; margin-top:7px; color:#d3a96a; font-size:8px; }
   .reduce-motion *, .reduce-motion *::before, .reduce-motion *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
 
+  /* ================= TUTORIAL / CODEX ================= */
+  .tut-open { display:block; margin:10px auto 0; padding:7px 12px; font:inherit; font-size:9px; letter-spacing:2px;
+    color:var(--ember); background:rgba(20,16,10,.6); border:1px solid #554225; cursor:pointer; }
+  .tut-open:hover { border-color:var(--ember); box-shadow:0 0 16px rgba(255,150,40,.2); }
+  #tutorial, #codexov, #truthov { position:fixed; inset:0; z-index:60; display:none; align-items:center; justify-content:center;
+    padding:18px; background:rgba(2,4,8,.86); backdrop-filter:blur(4px); }
+  .tut-panel, .codex-panel, .truth-panel { width:min(680px,96vw); max-height:88vh; overflow-y:auto; padding:24px 28px;
+    border:1px solid #3a4052; background:linear-gradient(160deg,#11141d,#070910); box-shadow:0 30px 90px #000c; }
+  .codex-panel { width:min(760px,96vw); }
+  .tut-kicker, .truth-kicker { color:var(--ember); font-size:9px; letter-spacing:4px; text-align:center; }
+  .tut-panel h2, .truth-panel h2 { margin:8px 0 16px; font-size:clamp(20px,4vw,30px); letter-spacing:4px; text-align:center; }
+  .tut-step { display:grid; grid-template-columns:78px 1fr; gap:12px; padding:9px 0; border-top:1px solid #232a3a;
+    font-size:11.5px; line-height:1.5; color:#b8c0d4; }
+  .tut-step b { color:var(--ember); font-size:9px; letter-spacing:1.5px; }
+  .tut-controls { display:flex; flex-wrap:wrap; gap:7px 14px; margin:15px 0 18px; font-size:9.5px; color:var(--dim); }
+  .tut-controls b { color:#d8c8a8; font-weight:normal; }
+  .tut-btn, #codex-close, #truth-close, #codex-btn { font:inherit; cursor:pointer; color:var(--ember); background:#17130e;
+    border:1px solid #554225; padding:9px 14px; letter-spacing:2px; }
+  .tut-btn { display:block; margin:0 auto; }
+  .tut-btn:hover, #codex-close:hover, #truth-close:hover, #codex-btn:hover { border-color:var(--ember); }
+  #codex-btn { position:absolute; left:18px; bottom:179px; z-index:12; pointer-events:auto; padding:6px 9px;
+    font-size:9px; letter-spacing:2px; background:rgba(7,9,15,.8); }
+  #codexov { z-index:65; }
+  .codex-head { display:flex; justify-content:space-between; align-items:center; gap:12px; padding-bottom:10px;
+    margin-bottom:10px; border-bottom:1px solid #2a3040; font-size:12px; letter-spacing:4px; }
+  .codex-sub { margin-bottom:12px; color:var(--dim); font-size:9px; letter-spacing:1.5px; }
+  #codexlist { display:grid; gap:8px; }
+  .cx { padding:7px 10px; border-left:2px solid #2a3040; background:rgba(10,13,22,.7); }
+  .cx.got { border-left-color:#9fd8ff; }
+  .cx-title { margin-bottom:3px; color:#9fd8ff; font-size:11px; letter-spacing:1.5px; }
+  .cx-text { color:#aeb8cc; font-size:10.5px; line-height:1.5; font-style:italic; }
+  .cx.locked .cx-title { color:#5a6278; }
+  .cx.locked .cx-text { color:#4a5268; }
+  #finaltruth { display:none; margin-top:16px; padding:14px; border:1px solid #6a5a30;
+    background:rgba(40,30,10,.35); color:#ffe0a0; font-family:Georgia,serif; font-style:italic; font-size:12px; line-height:1.65; }
+  #truthov { z-index:70; }
+  .truth-panel { text-align:center; border-color:#6a5a30; }
+  #truthtext { margin:16px 0 22px; color:#ffe0b0; font-family:Georgia,serif; font-style:italic; line-height:1.8; }
+  #bosstell { min-height:10px; margin:2px 0 6px; color:#a89a80; font-size:8.5px; letter-spacing:1px; }
+  #bosswarn { position:absolute; left:50%; top:27%; transform:translateX(-50%); display:none; padding:8px 14px;
+    border:1px solid #6a2020; background:rgba(20,4,6,.82); color:#ff6050; font-size:clamp(12px,2.2vw,18px);
+    letter-spacing:2px; text-align:center; box-shadow:0 0 30px rgba(255,40,30,.25); }
+  .bcard .tell { padding:2px 0 5px; color:#c9a04f; font-size:9px; }
   /* ================= MEMORY ================= */
   #memov { position:fixed; inset:0; z-index:50; display:none; align-items:center; justify-content:center;
     background:radial-gradient(ellipse at 50% 45%, rgba(8,20,30,0.55), rgba(0,0,0,0.9) 75%); backdrop-filter:blur(2px); cursor:pointer; }
@@ -236,9 +280,16 @@
     <div class="sec">HOW IT PLAYS</div>
     <div class="howto">
       <span><b data-action-keys="move"></b> move</span><span><b>MOUSE</b> aim</span><span><b data-action-keys="attack"></b> strike</span>
-      <span><b data-action-keys="bait"></b> bait</span><span><b data-action-keys="focus"></b> focus · Mael to flame</span><span><b data-action-keys="run"></b> run</span><span><b>only the unwitnessed are taken</b></span>
-      <span><b>Mael climbs the ten rungs · a brighter flame draws more eyes</b></span>
+      <span><b data-action-keys="bait"></b> bait</span><span><b data-action-keys="focus"></b> focus · amber → fuel</span><span><b data-action-keys="run"></b> run</span>
     </div>
+    <div class="howto">
+      <span><b>GOAL</b> collect amber to feed your flame</span>
+      <span><b>DARK</b> is the only place a strike lands</span>
+      <span><b>LIGHT</b> is safety — and a beacon</span>
+      <span><b>CAGES</b> linger and something wakes</span>
+      <span><b>ALONE?</b> bots fill the street</span>
+    </div>
+    <button id="tutorial-open" class="tut-open" type="button">HOW TO PLAY</button>
     <details class="asset-credits">
       <summary>ARTISTS &amp; ASSET LICENSES</summary>
       <p>Hero and undead sprites: <a href="https://elie-automata.itch.io/" target="_blank" rel="noreferrer">elie automata</a> (credit required). Knight: SmallScaleInt. Assassin: SovDigital.</p>
@@ -254,8 +305,9 @@
   <div id="biome-label" aria-live="polite">The Forgotten Graveyard</div>
   <div id="killboard"><div class="kbh">CLAIMS</div><div id="kblines"></div></div>
   <div id="feed"></div>
-  <div id="bossbar"><div id="bossname"></div><div class="bossbartrack"><div id="bossfill"></div></div></div>
+  <div id="bossbar"><div id="bossname"></div><div id="bosstell"></div><div class="bossbartrack"><div id="bossfill"></div></div></div>
   <div id="darkcd"></div>
+  <div id="bosswarn"></div>
   <div id="stun">⚡ STUMBLED</div>
   <div id="vignette"></div>
   <div id="flash"></div>
@@ -264,15 +316,54 @@
     <div class="fuelline"><span class="fic">🔥</span><span id="fueltxt">100</span><span class="fstate">TORCH FUEL</span></div>
     <div class="fuelbar"><div id="fuelbar" class="f-ok" style="width:100%"></div></div>
     <div class="rankline"><span id="ranktxt">WICK</span><span class="pips" id="pips"></span><span id="streaktxt"></span></div>
-    <div id="memcount" title="fragments remembered by the Street">ORUVEL · 0/10</div>
+    <div id="memcount" title="fragments you remember">MEMORIES · 0/10</div>
     <div id="fueltime" aria-live="polite">wick holds ~66s</div>
   </div>
+  <button id="codex-btn" type="button" aria-haspopup="dialog">CODEX · C</button>
   <div id="threat"></div>
 </div>
 <canvas id="mini" width="180" height="180"></canvas>
 <!-- DEATH -->
 <div id="deathov"><div id="deathmsg"></div><div class="dsub">the mask cracks · the street keeps moving</div></div>
   <div id="memov"><div class="memo-panel"><div id="memotitle"></div><div id="memotext"></div><div class="dsub">remember · tap to close</div></div></div>
+<!-- TUTORIAL -->
+<div id="tutorial" role="dialog" aria-modal="true" aria-labelledby="tutorial-title">
+  <div class="tut-panel">
+    <div class="tut-kicker">YOUR FIRST NIGHT</div>
+    <h2 id="tutorial-title">KEEP THE FLAME ALIVE</h2>
+    <div class="tut-step"><b>1 · FEED IT</b><span>Walk into amber. It refills your torch and raises your rank.</span></div>
+    <div class="tut-step"><b>2 · HIDE IT</b><span>Your flame is the only light in the street — and the easiest thing to see.</span></div>
+    <div class="tut-step"><b>3 · SNUFF IT</b><span>Strikes only kill from darkness. In the light, a swing is only a warning.</span></div>
+    <div class="tut-step"><b>4 · DON'T LINGER</b><span>Stand at a cage and something inside wakes. Bots fill the street, so you are never alone.</span></div>
+    <div class="tut-controls">
+      <span><b data-action-keys="move"></b> move</span>
+      <span><b data-action-keys="attack"></b> strike</span>
+      <span><b data-action-keys="bait"></b> bait</span>
+      <span><b data-action-keys="focus"></b> focus</span>
+      <span><b data-action-keys="run"></b> run</span>
+      <span><b>C</b> codex</span>
+    </div>
+    <button id="tutorial-close" class="tut-btn" type="button">WALK OUT ▶</button>
+  </div>
+</div>
+<!-- CODEX -->
+<div id="codexov" role="dialog" aria-modal="true" aria-labelledby="codextitle">
+  <div class="codex-panel">
+    <div class="codex-head"><span id="codextitle">THE CODEX</span><button id="codex-close" type="button">CLOSE</button></div>
+    <div class="codex-sub">fragments you have carried off the street</div>
+    <div id="codexlist"></div>
+    <div id="finaltruth"></div>
+  </div>
+</div>
+<!-- FINAL TRUTH -->
+<div id="truthov" role="dialog" aria-modal="true" aria-labelledby="truthtitle">
+  <div class="truth-panel">
+    <div class="truth-kicker">TEN OF TEN</div>
+    <h2 id="truthtitle">THE FINAL TRUTH</h2>
+    <p id="truthtext"></p>
+    <button id="truth-close" type="button">RETURN TO THE STREET</button>
+  </div>
+</div>
 <!-- TOUCH -->
 <div id="joy"><div id="joyknob"></div></div>
 <div class="tbtn" id="t-attack">ATK</div>

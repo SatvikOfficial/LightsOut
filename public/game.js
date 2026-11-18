@@ -362,12 +362,13 @@ async function cloneLantern(targetHeight, emissiveColor = null, emissiveIntensit
 
 // class roster + boss info come from the server (single source of truth)
 let CLASSES = {}, CLASS_IDS = [], BOSSES = {}
-let LORE_TEXT = [], FOCUSCFG = { AMBER: 1, FUEL: 40 };
+let LORE_TEXT = [], FOCUSCFG = { AMBER: 1, FUEL: 40 }, FINAL_TRUTH = '';
 let GAMECFG = { drain: 1.5, rankDrain: 0.04, runDrain: 2.1, run: 1.35, stateHz: 20, fallbackSpeed: 4.8 };
 fetch('/classes.json').then(r => r.ok ? r.json() : null).then(d => {
   if (!d) return;
   CLASSES = d.classes; CLASS_IDS = d.classIds; BOSSES = d.bosses;
   LORE_TEXT = d.lore || [];
+  FINAL_TRUTH = d.finalTruth || '';
   FOCUSCFG = d.focus || FOCUSCFG;
   if (d.config) GAMECFG = {
     ...GAMECFG,
@@ -1681,6 +1682,16 @@ addEventListener('keydown', (e) => {
     return;
   }
   if (document.getElementById('settings-controls')?.open || e.target.closest?.('input,textarea,select,[contenteditable="true"]')) return;
+  if (e.code === 'Escape') {
+    closeTutorial();
+    closeCodex();
+    $('truthov').style.display = 'none';
+    return;
+  }
+  if (e.code === 'KeyC' && !e.repeat) {
+    if ($('codexov').style.display === 'flex') closeCodex(); else openCodex();
+    return;
+  }
   keys[e.code] = true;
   if (!e.repeat) {
     if (e.code === userSettings.bindings.bait) doBait();
@@ -1759,7 +1770,7 @@ function showMemory(i) {
   if (!L) return;
   A.memory();
   if (meState) burst(new THREE.Vector3(meState.x, 1.4, meState.z), 0x9fd8ff, 30, 6, 3, 0.18, 1.2);
-  $('memotitle').textContent = 'ORUVEL · ' + L.title + '  ·  ' + (i + 1) + '/' + LORE_TEXT.length;
+  $('memotitle').textContent = 'MEMORY · ' + L.title + '  ·  ' + (i + 1) + '/' + LORE_TEXT.length;
   $('memotext').textContent = L.text;
   $('memov').style.display = 'flex';
 }
@@ -1772,11 +1783,11 @@ function doBait() { if (!inGame) return; A.ensure(); if (meState && meState.al &
 function doFocus() {
   if (!inGame || !ws || ws.readyState !== WebSocket.OPEN) return; A.ensure();
   if (!meState || !meState.al) return;
-  if ((meState.a || 0) < FOCUSCFG.AMBER) { showBanner('No Mael to spend.', ''); A.blip(); return; }
+  if ((meState.a || 0) < FOCUSCFG.AMBER) { showBanner('No amber to spend.', ''); A.blip(); return; }
   sendGameMessage({ t: 'focus' });
   A.focus();
   burst(new THREE.Vector3(meState.x, 1.4, meState.z), 0x9fd8ff, 26, 5, 2.6, 0.16, 1);
-  showBanner('FOCUS · Mael becomes flame', 'good');
+  showBanner('FOCUS · amber becomes flame', 'good');
 }
 function attackAnim() { if (selfChar) { selfChar._atkT = 0; } attackT = 0.4; A.swing(); }
 let attackT = 0;
@@ -1949,6 +1960,7 @@ function buildRoster() {
     title.textContent = b.name;
     summary.append(title, el('span', 'rumor', 'a street rumor · open to listen'));
     details.append(summary, el('span', '', b.lore));
+    if (b.tell) details.append(el('span', 'tell', b.tell));
     dossier.appendChild(details);
   }
   $('bosslore').replaceChildren(dossier);
@@ -1959,13 +1971,53 @@ function showBanner(txt, cls = '') {
   clearTimeout(banner._t);
   banner._t = setTimeout(() => { banner.className = 'banner'; }, 2600);
 }
+function openTutorial() { $('tutorial').style.display = 'flex'; }
+function closeTutorial() {
+  $('tutorial').style.display = 'none';
+  try { localStorage.setItem('lightsout.tutorialSeen', '1'); } catch { /* storage unavailable */ }
+}
+function ownedMemories() { return new Set(Array.isArray(meState?.mi) ? meState.mi : []); }
+function openCodex() {
+  if (!LORE_TEXT.length) return;
+  const owned = ownedMemories();
+  const list = $('codexlist');
+  const fragment = document.createDocumentFragment();
+  LORE_TEXT.forEach((entry, i) => {
+    const got = owned.has(i);
+    const box = el('div', 'cx ' + (got ? 'got' : 'locked'));
+    box.append(
+      el('div', 'cx-title', got ? entry.title : '???'),
+      el('div', 'cx-text', got ? entry.text : 'still unremembered'),
+    );
+    fragment.append(box);
+  });
+  list.replaceChildren(fragment);
+  const truth = $('finaltruth');
+  if (LORE_TEXT.length && owned.size >= LORE_TEXT.length && FINAL_TRUTH) {
+    truth.textContent = FINAL_TRUTH;
+    truth.style.display = 'block';
+  } else {
+    truth.textContent = '';
+    truth.style.display = 'none';
+  }
+  $('codexov').style.display = 'flex';
+}
+function closeCodex() { $('codexov').style.display = 'none'; }
+function showFinalTruth() {
+  if (!FINAL_TRUTH) return;
+  closeCodex();
+  $('memov').style.display = 'none';
+  $('truthtext').textContent = FINAL_TRUTH;
+  $('truthov').style.display = 'flex';
+  A.memory();
+}
 function flash(color, op = 0.5) {
   flashEl.style.background = color;
   flashEl.style.opacity = op;
   clearTimeout(flashEl._t);
   flashEl._t = setTimeout(() => { flashEl.style.opacity = 0; }, 90);
 }
-let prevAlive = new Set(), lastState = null, meState = null;
+let prevAlive = new Set(), lastState = null, meState = null, finalTruthShown = false;
 let lastFeedKey = '', lastZapT = 0, lastSiphonZap = 0, lastDrainZap = 0, lastHpFlash = 0;
 function hudTick(state, dt, t) {
   meState = state.p.find((p) => p.i === myId);
@@ -1995,7 +2047,11 @@ function hudTick(state, dt, t) {
   // stunned
   stunEl.style.display = meState.su ? 'block' : 'none';
   // memories collected (per-player, server-authoritative)
-  if (memcountEl) memcountEl.textContent = 'ORUVEL · ' + (meState.mc || 0) + '/' + (LORE_TEXT.length || 10);
+  if (memcountEl) memcountEl.textContent = 'MEMORIES · ' + (meState.mc || 0) + '/' + (LORE_TEXT.length || 10);
+  if (LORE_TEXT.length && (meState.mc || 0) >= LORE_TEXT.length && !finalTruthShown) {
+    finalTruthShown = true;
+    setTimeout(showFinalTruth, 1400);
+  }
   // threat
   threatEl.textContent = 'street ' + (state.hi.tf > 110 ? 'FEEDS' : state.hi.tf > 90 ? 'wary' : 'quiet') + ' · ' + state.hi.tf + '%';
   // vignette by darkness + boss proximity
@@ -2089,9 +2145,21 @@ function hudTick(state, dt, t) {
     bossBar.style.display = 'block';
     bossName.textContent = (show.held ? '👁 IT IS HOLDING YOU — ' : '') + (B ? B.def.name : '???') + '  ' + Math.round((1 - show.b.hp / Math.max(1, show.b.hm)) * 100) + '%';
     bossName.style.color = show.held ? '#ff5050' : '#e8e0c8';
+    $('bosstell').textContent = (B && B.def.tell) || '';
     bossFill.style.width = (100 - (show.b.hp / Math.max(1, show.b.hm)) * 100) + '%';
     bossFill.style.background = V2HEX(V.BOSS_COLORS[(B && B.def.id) || 'dracula']);
-  } else bossBar.style.display = 'none';
+  } else { bossBar.style.display = 'none'; $('bosstell').textContent = ''; }
+  // readable telegraphs for the three tells
+  let warn = '';
+  for (const b of state.b) {
+    if (b.st !== 'awake') continue;
+    const d = Math.hypot(b.x - meState.x, b.z - meState.z);
+    if (b.h === 'windup' && d < 18) warn = '🐺 VARGULF IS CROUCHING — RUN';
+    if (b.h === 'hold' && b.lt === myId) warn = '👁 IT HAS YOU — BE BRIGHT';
+    if (b.i === 0 && d < 9 && f > 0) warn = '🩸 LIGHT FEEDS DRACULA — BREAK AWAY';
+  }
+  const warnEl = $('bosswarn');
+  if (warn) { warnEl.textContent = warn; warnEl.style.display = 'block'; } else warnEl.style.display = 'none';
   // killboard
   const claimants = state.p.filter((p) => p.s > 0).sort((a, b) => b.s - a.s).slice(0, 5);
   if (!claimants.length) {
@@ -2172,7 +2240,14 @@ function connect() {
   const proto = location.protocol === 'https:' ? 'wss' : 'ws';
   const socket = new WebSocket(proto + '://' + location.host);
   ws = socket;
-  socket.onopen = () => { socket.send(JSON.stringify({ t: 'join', name: nameInp.value.trim() || 'Wanderer', cls: myClsId })); };
+  socket.onopen = () => {
+    const join = { t: 'join', name: nameInp.value.trim() || 'Wanderer', cls: myClsId };
+    try {
+      const token = sessionStorage.getItem('lightsout.resume');
+      if (token) join.token = token;
+    } catch { /* storage unavailable */ }
+    socket.send(JSON.stringify(join));
+  };
   socket.onmessage = (e) => {
     let m;
     try { m = JSON.parse(e.data); }
@@ -2180,6 +2255,7 @@ function connect() {
     if (m.t === 'welcome') {
       reconnectDelay = 1000;
       myId = m.id;
+      try { if (m.token) sessionStorage.setItem('lightsout.resume', m.token); } catch { /* storage unavailable */ }
       if (Number.isSafeInteger(m.seed)) setWorldSeed(m.seed);
       CLASSES = m.classes || CLASSES;
       selfCls = CLASSES[myClsId] || CLASSES[myClsId] || CLASSES.barb;
@@ -2194,7 +2270,7 @@ function connect() {
       deathOv.style.display = 'none';
       A.ensure();
       MUS.start();
-      showBanner('Stay bright. Stay brief.');
+      showBanner(m.resumed ? 'You return to the street.' : 'Stay bright. Stay brief.');
     }
     if (m.t === 'memory') showMemory(m.i);
     if (m.t === 'correct') { if (meState) { meState.x = m.x; meState.z = m.z; } return; }
@@ -2230,6 +2306,17 @@ function onState(m) {
   syncMems(m.m || [], performance.now() / 1000);
   syncBolts(m.r);
 }
+$('tutorial-open').addEventListener('click', openTutorial);
+$('tutorial-close').addEventListener('click', closeTutorial);
+$('tutorial').addEventListener('click', (e) => { if (e.target === $('tutorial')) closeTutorial(); });
+$('codex-btn').addEventListener('click', openCodex);
+$('codex-close').addEventListener('click', closeCodex);
+$('codexov').addEventListener('click', (e) => { if (e.target === $('codexov')) closeCodex(); });
+$('truth-close').addEventListener('click', () => { $('truthov').style.display = 'none'; });
+$('truthov').addEventListener('click', (e) => { if (e.target === $('truthov')) $('truthov').style.display = 'none'; });
+let tutorialSeen = false;
+try { tutorialSeen = localStorage.getItem('lightsout.tutorialSeen') === '1'; } catch { /* storage unavailable */ }
+if (!tutorialSeen) openTutorial();
 playBtn.onclick = () => {
   A.ensure(); A.blip();
   reconnectRequested = true;

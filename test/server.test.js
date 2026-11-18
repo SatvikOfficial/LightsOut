@@ -43,14 +43,14 @@ function track(ws) {
   };
 }
 
-async function join(url, { name = 'Tester', cls = 'monk' } = {}) {
+async function join(url, { name = 'Tester', cls = 'monk', token = '' } = {}) {
   const ws = new WebSocket(url);
   await new Promise((resolve, reject) => {
     ws.once('open', resolve);
     ws.once('error', reject);
   });
   const tracker = track(ws);
-  ws.send(JSON.stringify({ t: 'join', name, cls }));
+  ws.send(JSON.stringify({ t: 'join', name, cls, ...(token ? { token } : {}) }));
   const welcome = await tracker.next((m) => m.t === 'welcome');
   return { ws, tracker, welcome };
 }
@@ -290,13 +290,63 @@ test('health, status, security headers, MIME, and /classes.json caching are pres
   }
 });
 
+test('collecting a memory publishes its index in the player Codex state', async () => {
+  const { game, url } = await boot({ BOT_TARGET_HUMANS: 0, MEMORIES: { COUNT: 1 } });
+  try {
+    const { ws, tracker, welcome } = await join(url, { name: 'Rememberer' });
+    const me = [...game.players].find((p) => p.id === welcome.id);
+    const memory = game._internals.memories[0];
+    me.x = memory.x; me.z = memory.z;
+    const state = await tracker.next((m) => m.t === 'state' && (m.p.find((p) => p.i === welcome.id)?.mc || 0) === 1);
+    const self = state.p.find((p) => p.i === welcome.id);
+    assert.equal(self.mc, 1);
+    assert.deepEqual(self.mi, [0]);
+    ws.close();
+  } finally {
+    await game.stop();
+  }
+});
+
+test('a resume token reclaims the same player after a disconnect', async () => {
+  const { game, url } = await boot({ BOT_TARGET_HUMANS: 0, NET: { RESUME_TTL_MS: 500 } });
+  try {
+    const first = await join(url, { name: 'Returner' });
+    assert.ok(first.welcome.token, 'new joins receive a resume token');
+    first.ws.close();
+    await sleep(80);
+
+    const second = await join(url, { name: 'Returner', token: first.welcome.token });
+    assert.equal(second.welcome.id, first.welcome.id);
+    assert.equal(second.welcome.resumed, true);
+    second.ws.close();
+  } finally {
+    await game.stop();
+  }
+});
+
+test('/status exposes aggregate telemetry and the served config exposes the Final Truth', async () => {
+  const { game, http } = await boot({ BOT_TARGET_HUMANS: 0 });
+  try {
+    const status = await (await fetch(http + '/status')).json();
+    assert.equal(status.telemetry.humanDeaths, 0);
+    assert.equal(status.telemetry.sessions, 0);
+    assert.deepEqual(status.telemetry.deathsByCause, {});
+
+    const classes = await (await fetch(http + '/classes.json')).json();
+    assert.ok(classes.finalTruth.length > 20, 'final truth is served to the client');
+    assert.match(classes.bosses.vargulf.tell, /crouches/i);
+  } finally {
+    await game.stop();
+  }
+});
+
 // ---------------------------------------------------------------------
 // Combat rules exercised against the real closure, no sockets required.
 // ---------------------------------------------------------------------
-function headlessGame() {
+function headlessGame(extra = {}) {
   const game = createGame({
     seed: 99,
-    config: { TICK_MS: 600000, BOT_TARGET_HUMANS: 0, MEMORIES: { COUNT: 1 } },
+    config: { TICK_MS: 600000, BOT_TARGET_HUMANS: 0, MEMORIES: { COUNT: 1 }, ...extra },
   });
   game.config.TICK_MS = 50;
   return game;
@@ -386,6 +436,52 @@ test('bots resolve kills through the same dark-only attack path', async () => {
     assert.ok(bot.attackReadyAt >= now + 700);
   } finally {
     await game.stop();
+  }
+});
+
+test('class traits: gravedigger, lamp-monk, ember-drum, and lantern radius', async () => {
+  const digGame = headlessGame({ KILL_DROP_AMBER_CHANCE: 1 });
+  try {
+    const dig = addPlayer(digGame, 'Bram', 'dig', 0, 0, { fuel: 0 });
+    const victim = addPlayer(digGame, 'Marked', 'barb', 1, 0, { fuel: 100 });
+    assert.equal(digGame._internals.resolveAttack(dig, { tgt: 'p', id: victim.id }, Date.now()), true);
+    const rich = digGame._internals.ambers.find((amber) => amber.rich);
+    assert.ok(rich, 'gravedigger kills leave rich amber');
+    assert.equal(rich.rich, digGame.config.KILL_DROP_AMBER_FUEL);
+  } finally {
+    await digGame.stop();
+  }
+
+  const monkGame = headlessGame();
+  try {
+    const monk = addPlayer(monkGame, 'Lumen', 'monk', 0, 0, { fuel: 0 });
+    const victim = addPlayer(monkGame, 'Marked', 'barb', 1, 0, { fuel: 100 });
+    assert.equal(monkGame._internals.resolveAttack(monk, { tgt: 'p', id: victim.id }, Date.now()), true);
+    assert.equal(monk.fuel, monkGame.config.KILL_FUEL_GAIN * 1.5);
+  } finally {
+    await monkGame.stop();
+  }
+
+  const drumGame = headlessGame();
+  try {
+    const drum = addPlayer(drumGame, 'Petra', 'drum', 0, 0, { fuel: 0 });
+    const victim = addPlayer(drumGame, 'Marked', 'barb', 1, 0, { fuel: 100 });
+    const bystander = addPlayer(drumGame, 'Bystander', 'barb', 0, 6, { fuel: 100 });
+    const now = Date.now();
+    assert.equal(drumGame._internals.resolveAttack(drum, { tgt: 'p', id: victim.id }, now), true);
+    assert.ok(bystander.stunUntil > now, 'ember-drum stuns nearby walkers');
+    assert.equal(bystander.alive, true);
+  } finally {
+    await drumGame.stop();
+  }
+
+  const radiusGame = headlessGame();
+  try {
+    const barb = addPlayer(radiusGame, 'Barb', 'barb', 10, 10, { fuel: 50 });
+    const lante = addPlayer(radiusGame, 'Lante', 'lante', 12, 10, { fuel: 50 });
+    assert.ok(radiusGame._internals.fuelRadius(lante) > radiusGame._internals.fuelRadius(barb));
+  } finally {
+    await radiusGame.stop();
   }
 });
 

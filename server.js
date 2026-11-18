@@ -45,7 +45,7 @@ const CONFIG = {
   STUN_PULSE_MS: 800,
   STUN_PULSE_R: 7,
   BOT_TARGET_HUMANS: 8,
-  BOT_SPAWN_EVERY_MS: 1500,
+  BOT_SPAWN_EVERY_MS: 250,
   BOT_MAX: 11,
   BOT_DECIDE_MS: 350,
   BOT_BAITS: true,
@@ -54,6 +54,7 @@ const CONFIG = {
   BOT_RUN_MULT: 1.35,
   BOT_BAIT_CHANCE: 0.03,
   BOT_BAIT_COOLDOWN_MS: 20000,
+  BOT_KITE_R: 6,
   BOT_BOLD_SKILL: 12,
   BOT_TARGET_SLACK: 1.2,
   BOSS_MELEE_SLACK: 2.5,
@@ -89,6 +90,7 @@ const CONFIG = {
     RATE_VIOLATION_MULTIPLIER: 3,
     JOIN_TIMEOUT_MS: 5000,
     AFK_TIMEOUT_MS: Number(process.env.AFK_MS) || 60000,
+    RESUME_TTL_MS: Number(process.env.RESUME_TTL_MS) || 120000,
     MAX_CONNECTIONS_PER_IP: Number(process.env.MAX_CONNECTIONS_PER_IP) || 3,
     ORIGINS: (process.env.ORIGINS || '').split(',').map((s) => s.trim()).filter(Boolean),
     MOVE_SLACK: 0.5,
@@ -136,13 +138,16 @@ const BOT_CLASS_WEIGHTS = { barb: 3, arch: 3, mage: 2, witch: 2, dig: 3, monk: 2
 const BOSSES = {
   dracula:   { id:'dracula',   name: 'DRACULA, THE UNBURNED',    model: 'character-vampire.glb', scale: 2.6, hp: 260, speed: 4.2, cageAng: 90, drain: 2.2, drainR: 9,
                touchR: 2.4, touchCdMs: 1800, flinchR: 12, flinchFuel: 50, flinchRank: 4, slowMult: 0.55,
+               tell: 'His reach drains your flame — break away and come back dark.',
                lore: 'A count who died the night the first match was struck. He did not go out. Patient, elegant — and he HATES your light: standing near one feeds him. His touch in the dark is final.' },
   vargulf:   { id:'vargulf',   name: 'VARGULF, THE HOLLOW HOUND',model: 'character-zombie.glb',  scale: 2.3, hp: 220, speed: 6.5, cageAng: 210,
                windupMs: 700, dashMs: 500, dashSpeed: 17, dashCdMs: 5200, dashRange: 15, dashMin: 6, hitR: 2.4,
                fearFuel: 60, fearRank: 5,
+               tell: 'When he crouches, run. The dash kills through any light.',
                lore: 'Bred from the howl that came up out of the sea. It does not hunt the dark — it hunts the LIGHT. Your torch is its dinner bell. When it crouches, run.' },
   lamplight: { id:'lamplight', name: 'THE LAMPLIGHTER',          model: 'character-ghost.glb',   scale: 2.4, hp: 180, speed: 5.0, cageAng: 330,
                holdR: 2.6, holdBreakR: 4, holdBrightFuel: 40, holdBrightMs: 3000, holdDimMs: 1600, holdDelayMs: 600, holdCdMs: 2500,
+               tell: 'Bright flames make it flinch. Break the hold before it finishes.',
                lore: 'It walks the streets collecting every light that was ever snuffed, and it is not full yet. When it holds you, it remembers you. Bright flames make it flinch — be bright, be brief, be gone.' },
 };
 
@@ -161,6 +166,7 @@ const LORE = [
   { title: 'The Drum',          text: 'Petra\u2019s drum speaks a language the dark half-understands. When the drum sounds, the street stumbles. The dark does not. That is why they are afraid.' },
   { title: 'Guttering',         text: 'When your flame gutters, do not be ashamed. Every walker has been dark. The street does not count how long you stayed.' },
 ];
+const FINAL_TRUTH = 'The street was never dark. It was waiting for someone to carry the last flame far enough to remember why it was lit. You did. The lamps go out one by one — and for the first time, the dark is only dark.';
 
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
@@ -261,8 +267,13 @@ function createGame(options = {}) {
   const resourceZones = new Map();
   const RESOURCE_ZONE_SIZE = 96;
   const MAX_RESOURCE_ZONES = 160;
-  const stats = { errors: 0, ticks: 0, tickSamples: [] };
+  const stats = {
+    errors: 0, ticks: 0, tickSamples: [], sessions: 0, humanDeaths: 0,
+    deathsByCause: {}, humanKills: 0, firstKills: 0, bossKills: 0, memories: 0,
+    playMs: 0, playSessions: 0,
+  };
   const ipCounts = new Map();
+  const resumeTokens = new Map();
   let idSeq = 1;
   let botSeq = 0;
   let nextAmberId = 0;
@@ -428,10 +439,32 @@ function createGame(options = {}) {
       bloodlit: 0, stunUntil: 0, run: false, memories: new Set(),
       lastKiller: null, lastKillCause: '', lastPos: { x: 0, z: 0 },
       attackReadyAt: 0, moveBudget: 1, moveAt: Date.now(), lastActiveAt: Date.now(),
+      joinedAt: Date.now(), firstKillAt: 0, resumeToken: null, resumeTimer: null,
       botState: 'roam', botTarget: null, botPrey: null, botNext: 0, botMove: { x: 0, z: 0 },
     };
   }
   const BOT_NAMES = ['Bjorn', 'Kess', 'Mora', 'Ulfe', 'Ragnhild', 'Torvald', 'Skade', 'Eira', 'Sten', 'Wren', 'Halja', 'Osk', 'Yrsa', 'Baldur'];
+  function detachHuman(p) {
+    if (!p || p.isBot) return;
+    p.socket = null;
+    players.delete(p);
+    const token = p.resumeToken;
+    if (!token || !resumeTokens.has(token)) {
+      players.delete(p);
+      stats.playMs += Date.now() - p.joinedAt;
+      stats.playSessions++;
+      return;
+    }
+    clearTimeout(p.resumeTimer);
+    p.resumeTimer = setTimeout(() => {
+      if (p.socket) return;
+      resumeTokens.delete(token);
+      players.delete(p);
+      stats.playMs += Date.now() - p.joinedAt;
+      stats.playSessions++;
+    }, config.NET.RESUME_TTL_MS);
+    p.resumeTimer.unref?.();
+  }
   function spawnBot() {
     let taken = new Set(); for (const p of players) taken.add(p.name);
     let name;
@@ -455,12 +488,21 @@ function createGame(options = {}) {
     victim.lastKillCause = cause;
     victim.respawnAt = Date.now() + config.RESPAWN_MS;
     victim.lastPos = { x: victim.x, z: victim.z };
+    if (!victim.isBot) {
+      stats.humanDeaths++;
+      const key = cause || 'unknown';
+      stats.deathsByCause[key] = (stats.deathsByCause[key] || 0) + 1;
+    }
     // A death always breaks the streak, whoever caused it.
     victim.streak = 0;
     victim.bloodlit = 0;
     if (killer) {
       killer.streak++; killer.kills++;
       killer.bloodlit = Math.max(killer.bloodlit, Date.now() + 12000);
+      if (!killer.isBot) {
+        stats.humanKills++;
+        if (!killer.firstKillAt) { killer.firstKillAt = Date.now(); stats.firstKills++; }
+      }
     }
     if (killer && killer.cls === 'drum') {
       const now = Date.now();
@@ -482,6 +524,7 @@ function createGame(options = {}) {
     c.st = 0; c.awakeT = 0;
     dropBounty(b);
     if (killer) {
+      if (!killer.isBot) stats.bossKills++;
       killer.kills += config.BOSSES.BOSS_DAMAGE_BONUS;
       killer.amber += config.BOSSES.BOSS_AMBER_BONUS;
       killer.streak++;
@@ -733,8 +776,10 @@ function createGame(options = {}) {
         }
         continue;
       }
-      if (!p.isBot && now - p.lastActiveAt > config.NET.AFK_TIMEOUT_MS) {
+      if (!p.isBot && p.socket && now - p.lastActiveAt > config.NET.AFK_TIMEOUT_MS) {
         send(p.socket, { t: 'afk' });
+        resumeTokens.delete(p.resumeToken);
+        p.resumeToken = null;
         if (p.socket) p.socket.close(4001, 'afk');
         continue;
       }
@@ -802,6 +847,7 @@ function createGame(options = {}) {
         if (d < bestD) { bestD = d; best = p; }
       }
       if (best) {
+        stats.memories++;
         best.memories.add(m.i);
         send(best.socket, { t: 'memory', i: m.i });
         pushFeed({ t: now, m: '🕮 ' + best.name + ' finds a memory (' + best.memories.size + '/' + config.MEMORIES.COUNT + ')' });
@@ -861,7 +907,7 @@ function createGame(options = {}) {
         al: p.alive ? 1 : 0, n: p.name, c: p.cls, bk: p.bloodlit > now ? 1 : 0,
         sp: p.alive ? 0 : Math.max(0, p.respawnAt - now),
         dn: p.darkSince ? Math.max(0, config.DARK_GRACE_MS - (now - p.darkSince)) : 0,
-        lu: p.run ? 1 : 0, su: p.stunUntil > now ? 1 : 0, mc: p.memories.size,
+        lu: p.run ? 1 : 0, su: p.stunUntil > now ? 1 : 0, mc: p.memories.size, mi: [...p.memories],
       })),
       a: ambers.map((x) => ({ i: x.i, x: +x.x.toFixed(1), z: +x.z.toFixed(1), on: x.on ? 1 : 0 })),
       r: arrows.map((x) => ({ x: +x.x.toFixed(1), z: +x.z.toFixed(1) })),
@@ -885,6 +931,18 @@ function createGame(options = {}) {
   function botUpdate(p, dt, now) {
     if (now < p.botNext) { botStep(p, dt); return; }
     p.botNext = now + config.BOT_DECIDE_MS;
+
+    // A bot with amber but no flame spends its rank to survive instead of dying in place.
+    if (p.fuel <= 0 && p.amber >= config.FOCUS.AMBER) {
+      let nearbyLit = false;
+      for (const q of players) {
+        if (q !== p && q.alive && q.fuel > 0 && Math.hypot(q.x - p.x, q.z - p.z) < 8) { nearbyLit = true; break; }
+      }
+      if (!nearbyLit) {
+        p.amber -= config.FOCUS.AMBER;
+        p.fuel = Math.min(maxFuel(p), config.FOCUS.FUEL);
+      }
+    }
 
     let fear = null, fd = 1e9;
     for (const b of bosses) {
@@ -968,6 +1026,13 @@ function createGame(options = {}) {
     const now = Date.now();
     let tx = p.botMove.x, tz = p.botMove.z;
     if (p.botTarget) { tx = p.botTarget.x; tz = p.botTarget.z; }
+    if (p.botState === 'hunt' && p.botPrey && CLASSES[p.cls].kind === 'ranged') {
+      const preyD = Math.hypot(p.botPrey.x - p.x, p.botPrey.z - p.z);
+      if (preyD < config.BOT_KITE_R) {
+        tx = p.x + (p.x - p.botPrey.x) * 2;
+        tz = p.z + (p.z - p.botPrey.z) * 2;
+      }
+    }
     const d = Math.hypot(tx - p.x, tz - p.z);
     if (d > 0.6) {
       const sp = c.speed * (p.botState === 'flee' ? config.BOT_RUN_MULT : 1);
@@ -977,8 +1042,9 @@ function createGame(options = {}) {
       p.d = Math.atan2(tx - p.x, tz - p.z);
     }
     if (p.botState === 'hunt' && p.botPrey && p.botPrey.alive && canKill(p) && now >= p.attackReadyAt) {
-      resolveAttack(p, { tgt: 'p', id: p.botPrey.id }, now);
-      p.botState = 'roam'; p.botPrey = null;
+      if (resolveAttack(p, { tgt: 'p', id: p.botPrey.id }, now)) {
+        p.botState = 'roam'; p.botPrey = null;
+      }
     }
     p.lx = p.x; p.lz = p.z;
   }
@@ -1081,8 +1147,9 @@ function createGame(options = {}) {
     return {
       classes: CLASSES,
       classIds: CLASS_IDS,
-      bosses: pub(BOSSES, ['id', 'name', 'model', 'scale', 'lore', 'cageAng']),
+      bosses: pub(BOSSES, ['id', 'name', 'model', 'scale', 'lore', 'tell', 'cageAng']),
       lore: LORE,
+      finalTruth: FINAL_TRUTH,
       focus: config.FOCUS,
       worldSeed: WORLD_SEED,
       config: {
@@ -1116,6 +1183,12 @@ function createGame(options = {}) {
         tickP95: p95(stats.tickSamples),
         tickSamples: stats.tickSamples.length,
         errors: stats.errors,
+        telemetry: {
+          sessions: stats.sessions, humanDeaths: stats.humanDeaths, deathsByCause: stats.deathsByCause,
+          humanKills: stats.humanKills, firstKills: stats.firstKills, bossKills: stats.bossKills,
+          memories: stats.memories,
+          avgSessionSeconds: stats.playSessions ? Math.round(stats.playMs / stats.playSessions / 1000) : 0,
+        },
         uptime: Math.round(process.uptime()),
       });
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
@@ -1215,6 +1288,21 @@ function createGame(options = {}) {
       send(ws, { t: 'full' });
       return;
     }
+    const token = typeof message.token === 'string' && message.token.length <= 128 ? message.token : '';
+    const returning = token ? resumeTokens.get(token) : null;
+    if (returning && !returning.isBot && !returning.socket) {
+      clearTimeout(returning.resumeTimer);
+      returning.socket = ws;
+      returning.lastActiveAt = Date.now();
+      players.add(returning);
+      ws.player = returning;
+      clearTimeout(ws.joinTimer);
+      send(ws, { t: 'welcome', id: returning.id, c: CLASS_IDS, cls: returning.cls, classes: CLASSES, seed: WORLD_SEED, token, resumed: true });
+      pushFeed({ t: Date.now(), m: returning.name + ' returns to the street' });
+      return;
+    }
+    if (token) resumeTokens.delete(token);
+
     let humans = 0;
     for (const p of players) if (!p.isBot) humans++;
     if (humans >= config.MAX_PLAYERS) { send(ws, { t: 'full' }); return; }
@@ -1225,10 +1313,13 @@ function createGame(options = {}) {
     const cls = CLASSES[message.cls] ? message.cls : 'barb';
     const p = makePlayer(name, cls, ws, false);
     p.lx = p.x; p.lz = p.z;
+    p.resumeToken = crypto.randomBytes(24).toString('base64url');
+    resumeTokens.set(p.resumeToken, p);
+    stats.sessions++;
     players.add(p);
     ws.player = p;
     clearTimeout(ws.joinTimer);
-    send(ws, { t: 'welcome', id: p.id, c: CLASS_IDS, cls, classes: CLASSES, seed: WORLD_SEED });
+    send(ws, { t: 'welcome', id: p.id, c: CLASS_IDS, cls, classes: CLASSES, seed: WORLD_SEED, token: p.resumeToken });
     pushFeed({ t: Date.now(), m: name + ' lights a torch' });
   }
 
@@ -1322,7 +1413,11 @@ function createGame(options = {}) {
       clearTimeout(ws.joinTimer);
       const remaining = (ipCounts.get(ip) || 1) - 1;
       if (remaining > 0) ipCounts.set(ip, remaining); else ipCounts.delete(ip);
-      if (ws.player) { players.delete(ws.player); ws.player = null; }
+      if (ws.player) {
+        const p = ws.player;
+        ws.player = null;
+        if (p.socket === ws) detachHuman(p);
+      }
     });
   });
 
@@ -1338,6 +1433,7 @@ function createGame(options = {}) {
   }
   function stop() {
     for (const timer of intervals) clearInterval(timer);
+    for (const p of players) clearTimeout(p.resumeTimer);
     for (const ws of wss.clients) { try { ws.terminate(); } catch { /* noop */ } }
     return new Promise((resolve) => {
       wss.close(() => httpServer.close(() => resolve()));
@@ -1346,7 +1442,7 @@ function createGame(options = {}) {
 
   return {
     httpServer, wss, config, listen, stop, players, bosses,
-    _internals: { makePlayer, applyState, resolveAttack, killPlayer, tick, send, memories, arrows, ambers, canKill },
+    _internals: { makePlayer, applyState, resolveAttack, killPlayer, tick, send, memories, arrows, ambers, canKill, fuelRadius },
   };
 }
 
