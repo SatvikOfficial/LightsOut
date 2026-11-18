@@ -1,0 +1,5 @@
+Undead/Doll_Like_Girl
+Undead/Undead_Bone_Guardian_02
+Undead/Undead_Halberdier
+Undead/Undead_Skeleton_Crusher
+Undead/Undead_Skeleton_Knight_02

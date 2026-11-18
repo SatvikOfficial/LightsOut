@@ -1,0 +1,9 @@
+GENERATIVE AI DISCLOSURE
+
+This product contains graphics produced with a generative-AI image system. The
+released files were selected, background-cleaned, alpha-normalized, renamed,
+organized and quality-checked before packaging.
+
+For an itch.io asset page, answer YES to the Generative AI disclosure and select
+Graphics. Buyers should verify whether their own distribution platforms require
+additional disclosure when these assets are used in another product.

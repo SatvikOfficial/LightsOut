@@ -1,0 +1,29 @@
+UNITY AND GODOT IMPORT GUIDE
+
+UNITY
+
+1. Import the PNG files into your Assets folder.
+2. Texture Type: Sprite (2D and UI).
+3. Sprite Mode: Single.
+4. Alpha Is Transparency: enabled.
+5. Mesh Type: Full Rect is recommended for predictable placement.
+6. Pivot: Bottom Center for buildings, vegetation and props.
+7. Filter Mode: Point for a crisp pixel-art-style result, or Bilinear if you prefer
+   a smoother high-resolution presentation.
+8. Compression: None for maximum fidelity.
+9. Use the same Pixels Per Unit value for every asset in the pack.
+
+GODOT 4
+
+1. Copy the PNG files into the project folder.
+2. Select the imported textures and choose the desired texture filter globally.
+3. Disable filtering for a crisp pixel-art-style result.
+4. Keep a shared scale value for every asset.
+5. Place the sprite origin near the bottom center when sorting objects by Y position.
+
+GENERAL
+
+The files intentionally retain different canvas dimensions because the objects have
+different physical sizes. Keep their relative scale consistent instead of forcing
+every image into the same canvas. Road images are pre-built pieces rather than a
+seamless grid-based terrain tileset.

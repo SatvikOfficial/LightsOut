@@ -1,0 +1,172 @@
+{
+  "Human_Knight_01": {
+    "east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Knight_01/Human_Knight_01/rotations/east.png",
+      "sha256": "cd58c479e7a2559e2daef2746ca88f92c5d2ea3aa1930c88d5320c7396a2cf36"
+    },
+    "north-east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Knight_01/Human_Knight_01/rotations/north-east.png",
+      "sha256": "8d5fa3153940ee4a0e8fba1acb5d6023b4b65c1beb4ef9f376c9a7af0270048e"
+    },
+    "north-west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Knight_01/Human_Knight_01/rotations/north-west.png",
+      "sha256": "3ba4a73cbca1afec33b27eb50a3a56814280a6847ed7c2f3a708b1d19f6a1181"
+    },
+    "north.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Knight_01/Human_Knight_01/rotations/north.png",
+      "sha256": "2406205df9a789b1b8830fb95ee7bdcd7f6e8ba538a45577fc83d131d43b965a"
+    },
+    "south-east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Knight_01/Human_Knight_01/rotations/south-east.png",
+      "sha256": "2e5f1d432b239ed903b21393888533564349ca2a9bdb518f805f602032b54df4"
+    },
+    "south-west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Knight_01/Human_Knight_01/rotations/south-west.png",
+      "sha256": "e8146a66b4b7d7b8e01fc6acf9f8206f11a6f17d5482ab43a9fca38257019ffb"
+    },
+    "south.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Knight_01/Human_Knight_01/rotations/south.png",
+      "sha256": "3e769cc2fab045b4f7a062a052333743c66932ef7e63f5af1c1542eda8247e29"
+    },
+    "west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Knight_01/Human_Knight_01/rotations/west.png",
+      "sha256": "08f8ac2e665c02f96a7b180fe761b74a6890428ffc6162578d27a434e7484816"
+    }
+  },
+  "Elven_Archer": {
+    "east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Elven_Archer/Elven_Archer/rotations/east.png",
+      "sha256": "8d1a11966eb99e610675b26031727ea25c09ed08181eac36aa6ed8ef7f9664dd"
+    },
+    "north-east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Elven_Archer/Elven_Archer/rotations/north-east.png",
+      "sha256": "e1ca2c1155ef446ff068e70962b8a8826794458f3f2d3faee1923785926625b3"
+    },
+    "north-west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Elven_Archer/Elven_Archer/rotations/north-west.png",
+      "sha256": "2d0f6dd62374b34f76111f0b635c69321642286581cc313143703276316b4d48"
+    },
+    "north.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Elven_Archer/Elven_Archer/rotations/north.png",
+      "sha256": "4cd65ef0961d2e00263fbda47509d24cf8c03c817b779dcf4d9f93ebbd8e1919"
+    },
+    "south-east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Elven_Archer/Elven_Archer/rotations/south-east.png",
+      "sha256": "e87673576eab71e64c9263cbcb95c96df703bca363c0250469101b822aae1a47"
+    },
+    "south-west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Elven_Archer/Elven_Archer/rotations/south-west.png",
+      "sha256": "252a20410effc94543f42269b374d99412c4d6294baa097547e4078baa8b90f6"
+    },
+    "south.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Elven_Archer/Elven_Archer/rotations/south.png",
+      "sha256": "de9dda05b3e0609c6c26605281e1598d3a5dfd1a9e4e95784544df7058c1acfe"
+    },
+    "west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Elven_Archer/Elven_Archer/rotations/west.png",
+      "sha256": "eb0d51ef0a82e7b30ef5df0b9e02ca04cc5a8ea5808337a3afc0aad01ea57c76"
+    }
+  },
+  "Human_Archmage": {
+    "east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Archmage/Human_Archmage/rotations/east.png",
+      "sha256": "9df95f5cb4e654bfa554896bffcba4b75d955d7330172cb187d443d48f088fa7"
+    },
+    "north-east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Archmage/Human_Archmage/rotations/north-east.png",
+      "sha256": "c4306ccaeacfbea56c6d674923619f329d20f0164cb7b613bd640de51e3500bf"
+    },
+    "north-west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Archmage/Human_Archmage/rotations/north-west.png",
+      "sha256": "25744faae3e03cabc7f561ca9f0060ec744947fd7b1e1a2f44b3bb1794e9804f"
+    },
+    "north.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Archmage/Human_Archmage/rotations/north.png",
+      "sha256": "0a0beacf313a2ac93fd52f117fc48d96d42f89de1e9801d4535b2d105a1e0f94"
+    },
+    "south-east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Archmage/Human_Archmage/rotations/south-east.png",
+      "sha256": "947420bdea7338c62d25a9354b2717619a736345ef7e56505ce1ed7e7120ff9a"
+    },
+    "south-west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Archmage/Human_Archmage/rotations/south-west.png",
+      "sha256": "2ab68ea2a748cfdaa9a7302d5d1a8067a438776017dac105726bb7acedb70481"
+    },
+    "south.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Archmage/Human_Archmage/rotations/south.png",
+      "sha256": "577d2120189fc8c70305fc6cb048a9666c076d89ceb885b3d9ae89b6933137ea"
+    },
+    "west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Human_Archmage/Human_Archmage/rotations/west.png",
+      "sha256": "8f55f1912f91d0bcbb652ed909d87899eb3a223d3e90490b21ce6753e2d4f898"
+    }
+  },
+  "Dwarf_Engineer_01": {
+    "east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Dwarf_Engineer_01/Dwarf_Engineer_01/rotations/east.png",
+      "sha256": "eb764a380d3fd5b5904ea76242c039d5e0466b2c88772a16219749110200de45"
+    },
+    "north-east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Dwarf_Engineer_01/Dwarf_Engineer_01/rotations/north-east.png",
+      "sha256": "d5e2cf86aaaa352e78e019267d6f7c6f804288b0c2f7279aea0133bad8f04b6a"
+    },
+    "north-west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Dwarf_Engineer_01/Dwarf_Engineer_01/rotations/north-west.png",
+      "sha256": "98a3e177f6af088c31ee7ee17684e56f4e16e4abe76274c90975eed728c008be"
+    },
+    "north.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Dwarf_Engineer_01/Dwarf_Engineer_01/rotations/north.png",
+      "sha256": "95684dd517230517ce61ab26b7d660506ac783783a5cce39f814aa9ff23ea0a3"
+    },
+    "south-east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Dwarf_Engineer_01/Dwarf_Engineer_01/rotations/south-east.png",
+      "sha256": "731c3e2de18aa520ed40d440785289feb82047b287605f9f64f1b979ea851917"
+    },
+    "south-west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Dwarf_Engineer_01/Dwarf_Engineer_01/rotations/south-west.png",
+      "sha256": "3d5aa5b3c4b5c1e3f34f632423ba89e914e3a84d933a05fb9d08a7665030184d"
+    },
+    "south.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Dwarf_Engineer_01/Dwarf_Engineer_01/rotations/south.png",
+      "sha256": "6c7c30a91bfbc04dde6745298266a4c89d739743ad2879db6dab2544aaeda5ae"
+    },
+    "west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (9)/characters/Dwarf_Engineer_01/Dwarf_Engineer_01/rotations/west.png",
+      "sha256": "403cc78c34b92b0fa45bb9bf3aad261d6ec5f794bf72f7e56062ea4974196fdb"
+    }
+  },
+  "Human_Bard_01": {
+    "east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Human_Bard_01/Human_Bard_01/rotations/east.png",
+      "sha256": "438bd6e5eb84431b6d0efcced31a1f790a12b57a880dceb95d7e26cad1687f22"
+    },
+    "north-east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Human_Bard_01/Human_Bard_01/rotations/north-east.png",
+      "sha256": "d6adba37aeb54a3481e6ba439550d3dcf32374b67815e57930af6f4388179ca2"
+    },
+    "north-west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Human_Bard_01/Human_Bard_01/rotations/north-west.png",
+      "sha256": "f50772c78927edc94b923c329610d5626eaae8db36dc3964153091eef9b4d69d"
+    },
+    "north.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Human_Bard_01/Human_Bard_01/rotations/north.png",
+      "sha256": "60484ec92d5c0d14ec716ec04651afd436844779b5a44745e9bad65127a68bc3"
+    },
+    "south-east.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Human_Bard_01/Human_Bard_01/rotations/south-east.png",
+      "sha256": "53689c8372d15308fafb5d3aa1741c01df38a883263707bd33e51576ea3fb855"
+    },
+    "south-west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Human_Bard_01/Human_Bard_01/rotations/south-west.png",
+      "sha256": "3453cc9ff5d436d450f93d7c863d2fa3fe93342f3a3f9b4a02591b35ba25c8f8"
+    },
+    "south.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Human_Bard_01/Human_Bard_01/rotations/south.png",
+      "sha256": "72bd8ec96a117157f588929614c6d21dcef7bfa5a0461ab53d4b0d783bf208c5"
+    },
+    "west.png": {
+      "source": "k\u1ebft qu\u1ea3 - All 20.10/selected_characters (10)/characters/Human_Bard_01/Human_Bard_01/rotations/west.png",
+      "sha256": "bc71212267f7843d66d9b60f5f87ea63a028643ce33582b0f5e4aa21b2717148"
+    }
+  }
+}

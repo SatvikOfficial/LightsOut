@@ -1,0 +1,396 @@
+{
+  "characters": {
+    "Undead/Doll_Like_Girl": {
+      "name": "Doll Like Girl",
+      "group": "Undead",
+      "directions": {
+        "south": "characters/Undead/Doll_Like_Girl/rotations/south.png",
+        "south-east": "characters/Undead/Doll_Like_Girl/rotations/south-east.png",
+        "east": "characters/Undead/Doll_Like_Girl/rotations/east.png",
+        "north-east": "characters/Undead/Doll_Like_Girl/rotations/north-east.png",
+        "north": "characters/Undead/Doll_Like_Girl/rotations/north.png",
+        "north-west": "characters/Undead/Doll_Like_Girl/rotations/north-west.png",
+        "west": "characters/Undead/Doll_Like_Girl/rotations/west.png",
+        "south-west": "characters/Undead/Doll_Like_Girl/rotations/south-west.png"
+      }
+    },
+    "Undead/Undead_Bone_Guardian_02": {
+      "name": "Undead Bone Guardian 02",
+      "group": "Undead",
+      "directions": {
+        "south": "characters/Undead/Undead_Bone_Guardian_02/rotations/south.png",
+        "south-east": "characters/Undead/Undead_Bone_Guardian_02/rotations/south-east.png",
+        "east": "characters/Undead/Undead_Bone_Guardian_02/rotations/east.png",
+        "north-east": "characters/Undead/Undead_Bone_Guardian_02/rotations/north-east.png",
+        "north": "characters/Undead/Undead_Bone_Guardian_02/rotations/north.png",
+        "north-west": "characters/Undead/Undead_Bone_Guardian_02/rotations/north-west.png",
+        "west": "characters/Undead/Undead_Bone_Guardian_02/rotations/west.png",
+        "south-west": "characters/Undead/Undead_Bone_Guardian_02/rotations/south-west.png"
+      }
+    },
+    "Undead/Undead_Halberdier": {
+      "name": "Undead Halberdier",
+      "group": "Undead",
+      "directions": {
+        "south": "characters/Undead/Undead_Halberdier/rotations/south.png",
+        "south-east": "characters/Undead/Undead_Halberdier/rotations/south-east.png",
+        "east": "characters/Undead/Undead_Halberdier/rotations/east.png",
+        "north-east": "characters/Undead/Undead_Halberdier/rotations/north-east.png",
+        "north": "characters/Undead/Undead_Halberdier/rotations/north.png",
+        "north-west": "characters/Undead/Undead_Halberdier/rotations/north-west.png",
+        "west": "characters/Undead/Undead_Halberdier/rotations/west.png",
+        "south-west": "characters/Undead/Undead_Halberdier/rotations/south-west.png"
+      }
+    },
+    "Undead/Undead_Skeleton_Crusher": {
+      "name": "Undead Skeleton Crusher",
+      "group": "Undead",
+      "directions": {
+        "south": "characters/Undead/Undead_Skeleton_Crusher/rotations/south.png",
+        "south-east": "characters/Undead/Undead_Skeleton_Crusher/rotations/south-east.png",
+        "east": "characters/Undead/Undead_Skeleton_Crusher/rotations/east.png",
+        "north-east": "characters/Undead/Undead_Skeleton_Crusher/rotations/north-east.png",
+        "north": "characters/Undead/Undead_Skeleton_Crusher/rotations/north.png",
+        "north-west": "characters/Undead/Undead_Skeleton_Crusher/rotations/north-west.png",
+        "west": "characters/Undead/Undead_Skeleton_Crusher/rotations/west.png",
+        "south-west": "characters/Undead/Undead_Skeleton_Crusher/rotations/south-west.png"
+      }
+    },
+    "Undead/Undead_Skeleton_Knight_02": {
+      "name": "Undead Skeleton Knight 02",
+      "group": "Undead",
+      "directions": {
+        "south": "characters/Undead/Undead_Skeleton_Knight_02/rotations/south.png",
+        "south-east": "characters/Undead/Undead_Skeleton_Knight_02/rotations/south-east.png",
+        "east": "characters/Undead/Undead_Skeleton_Knight_02/rotations/east.png",
+        "north-east": "characters/Undead/Undead_Skeleton_Knight_02/rotations/north-east.png",
+        "north": "characters/Undead/Undead_Skeleton_Knight_02/rotations/north.png",
+        "north-west": "characters/Undead/Undead_Skeleton_Knight_02/rotations/north-west.png",
+        "west": "characters/Undead/Undead_Skeleton_Knight_02/rotations/west.png",
+        "south-west": "characters/Undead/Undead_Skeleton_Knight_02/rotations/south-west.png"
+      }
+    }
+  },
+  "files": {
+    "characters/Undead/Doll_Like_Girl/rotations/south.png": {
+      "sha256": "56e4d55990d7b4bdbfc35f401c64429ce5da4096287f758205d6cb8fda9c747a",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Doll_Like_Girl/south.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Doll_Like_Girl/rotations/south-east.png": {
+      "sha256": "5150de995df27872315401b6cf5b0b7c367146887e0b703f8d7b03fb07c249b3",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Doll_Like_Girl/south-east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Doll_Like_Girl/rotations/east.png": {
+      "sha256": "5da0100295cd666e67884993e938a5e2e4b5fbe79e5dcdb756aced46a9130378",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Doll_Like_Girl/east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Doll_Like_Girl/rotations/north-east.png": {
+      "sha256": "96a621f939e42fc9a400a90715178ad4bbc8b2825c70e0a622a10e9853094525",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Doll_Like_Girl/north-east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Doll_Like_Girl/rotations/north.png": {
+      "sha256": "514a042ac71fab2f4d67652a976cb0fa253d85716424c73024d4957a7ba96437",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Doll_Like_Girl/north.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Doll_Like_Girl/rotations/north-west.png": {
+      "sha256": "84e1482de71029e1714c7e87d7fb65a2d8caf956bcf4fa3efa33f366cd323a86",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Doll_Like_Girl/north-west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Doll_Like_Girl/rotations/west.png": {
+      "sha256": "771c7948535ee3957583c2498db6cfe416f0b4c8865f7e36a6ecb47bd8859f68",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Doll_Like_Girl/west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Doll_Like_Girl/rotations/south-west.png": {
+      "sha256": "4692980391b256f1976657d963100cda92398c50fee4f0cce7dd1d54bb5058df",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Doll_Like_Girl/south-west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Bone_Guardian_02/rotations/south.png": {
+      "sha256": "fa89306c0ed35162e925c31da03d7346ce32be6851b36dc722ed56b9c6f5b95d",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Bone_Guardian_02/south.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Bone_Guardian_02/rotations/south-east.png": {
+      "sha256": "fe7742d9e3fb5d3e36dedc0f6280a8b7d13aa42012b6c4a4f90726ae1d822474",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Bone_Guardian_02/south-east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Bone_Guardian_02/rotations/east.png": {
+      "sha256": "78e474bff993e3eaef1416ab1c90bfc87361b9a6c658f35fd3561a64fd2fe8d8",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Bone_Guardian_02/east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Bone_Guardian_02/rotations/north-east.png": {
+      "sha256": "9930de185b6496a79d590ed4d5b728532ecf601c0321b3bf0a6d68fdce289c98",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Bone_Guardian_02/north-east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Bone_Guardian_02/rotations/north.png": {
+      "sha256": "17a918a7132ab9b168529edf70822c099eb2d1f5731cd731ff62afcd8bfb048a",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Bone_Guardian_02/north.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Bone_Guardian_02/rotations/north-west.png": {
+      "sha256": "dc9b503ea151c5b2d09edc2b46495f06412727fd0586fcea396e107d7b3d08ab",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Bone_Guardian_02/north-west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Bone_Guardian_02/rotations/west.png": {
+      "sha256": "5a699cdd4927eb1934438f9a07dc7aac6808d7ce9975175cdaf7c0a7e6263464",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Bone_Guardian_02/west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Bone_Guardian_02/rotations/south-west.png": {
+      "sha256": "6923ec9da3c81c0363a4ebe333eb791115a529ee38cd46347859f928485d9639",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Bone_Guardian_02/south-west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Halberdier/rotations/south.png": {
+      "sha256": "4f1458b8ef9b887ea0228de61045c9feec9c271b8210118e1896ca88ea883cba",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Halberdier/south.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Halberdier/rotations/south-east.png": {
+      "sha256": "6cacd6c73c72f1f0cec18cfc7e3818745df6319878e0a33490a6909a03bc3998",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Halberdier/south-east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Halberdier/rotations/east.png": {
+      "sha256": "edfd0340a7635fa1c6253b300610d80d2de21c35e43bccaf9a84fbed78ee4162",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Halberdier/east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Halberdier/rotations/north-east.png": {
+      "sha256": "72bbba1d3d2eeec7a20f627d9388b49b31a7055d4bf8bda79f5453d901b5c066",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Halberdier/north-east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Halberdier/rotations/north.png": {
+      "sha256": "f52dcf1c1db4136758fd9ddbcd125aa864045c02a028152afa3f0c06998ff761",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Halberdier/north.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Halberdier/rotations/north-west.png": {
+      "sha256": "ac745be3ad656382616709da08b16942c8d74b2e03dfa835bdb70196a270772c",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Halberdier/north-west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Halberdier/rotations/west.png": {
+      "sha256": "ad1388063bcd75d540966762c31db188767d3a614b41fe496b90ebee89e61f35",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Halberdier/west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Halberdier/rotations/south-west.png": {
+      "sha256": "262288d0b01781e77cf22e83150135830fa0359eeb0f44339c00d6d6d15fecb0",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Halberdier/south-west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Crusher/rotations/south.png": {
+      "sha256": "97331e47f480057b16b0e7593c275ec07dd2e6875e4a3db4fd07bf65373d1dd4",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Crusher/south.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Crusher/rotations/south-east.png": {
+      "sha256": "0bac6efcc2dced60593e8dfef73ef26990660488c5007fd251266cab1bfaa946",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Crusher/south-east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Crusher/rotations/east.png": {
+      "sha256": "37847bc4ffa354d8113bc3452b8b22b915db8fd67d4bd9544a60fcd8ebf7df34",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Crusher/east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Crusher/rotations/north-east.png": {
+      "sha256": "0b2102d0c9d3180b075297808f028a3f219753e4045ecd0ce8e7c89e91a2ebbf",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Crusher/north-east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Crusher/rotations/north.png": {
+      "sha256": "5524a536bda3da1d1d3fb4f750de6aea58681c153e01ad5ebfdb30ed22af0f8c",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Crusher/north.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Crusher/rotations/north-west.png": {
+      "sha256": "ed7c0acb09bf375a79c7b717c31712e34be0ef4b8ca681b59d69e07e37abfa98",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Crusher/north-west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Crusher/rotations/west.png": {
+      "sha256": "ac7929b2c4242d582a20ce4e46ede23c6f3fded1e9bd9c81810081aadc2e425d",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Crusher/west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Crusher/rotations/south-west.png": {
+      "sha256": "307e80ce28726b1fba3f69c0fe7936768b9ea358cd1d63a8d039de1dd6188a1b",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Crusher/south-west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Knight_02/rotations/south.png": {
+      "sha256": "00b81dacc111284060f17170bcef44b449bfec8456c7979aa0c2dbe1d8b2f891",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Knight_02/south.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Knight_02/rotations/south-east.png": {
+      "sha256": "aa62adb1b3caaa21fd2ae3dae7077001c1679e16658a1bc6efd19b990601e965",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Knight_02/south-east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Knight_02/rotations/east.png": {
+      "sha256": "f227967a45ee7ff2b5e201791f68a69cc19cd2e58a4e9968d61f895c5fc4d8d3",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Knight_02/east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Knight_02/rotations/north-east.png": {
+      "sha256": "1a3a015339be0037dfb35a72bbf6dae401c14c0a84f755d136c3b4ea0bdd07a1",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Knight_02/north-east.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Knight_02/rotations/north.png": {
+      "sha256": "75e5386a37d71b25344583ff5e9620ada293b3cfd25ba9c0551ffb64444e8433",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Knight_02/north.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Knight_02/rotations/north-west.png": {
+      "sha256": "5e7870e09ef7df9f5e6c2196a5783c7e00eefc11f4804a900ec115dca585e86b",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Knight_02/north-west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Knight_02/rotations/west.png": {
+      "sha256": "53d0b7638a80461b7b32510de9268fc34c33e967cc7c8d2e14b1894a79aea0fe",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Knight_02/west.png",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "characters/Undead/Undead_Skeleton_Knight_02/rotations/south-west.png": {
+      "sha256": "df8b24483e4295c9c3aeb3d8eb84c24765ab6847921805518c38ca86c8165dc7",
+      "source": "k\u1ebft qu\u1ea3 - 21.10.5.56/Undead/Undead_Skeleton_Knight_02/south-west.png",
+      "size": [
+        64,
+        64
+      ]
+    }
+  }
+}

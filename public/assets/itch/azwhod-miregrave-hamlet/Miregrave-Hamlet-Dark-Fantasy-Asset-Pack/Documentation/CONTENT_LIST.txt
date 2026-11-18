@@ -1,0 +1,47 @@
+MIREGRAVE HAMLET — CONTENT LIST
+
+01 Buildings
+- building_01_log_cabin.png — 736×870 px
+- building_02_red_roof_cabin.png — 1035×1002 px
+- building_03_dark_timber_cabin.png — 986×945 px
+- building_04_elevated_wood_hut.png — 748×1109 px
+- building_05_ruined_cottage.png — 831×933 px
+- building_06_tall_gothic_house.png — 866×1186 px
+- building_07_large_gothic_house.png — 1183×867 px
+- building_08_red_roof_house.png — 1067×977 px
+- building_09_plaster_poor_house.png — 787×1201 px
+- building_10_tall_poor_house.png — 936×1116 px
+- building_11_long_poor_house.png — 1161×772 px
+- building_12_red_roof_poor_house.png — 1007×827 px
+
+02 Vegetation
+- vegetation_01_ancient_dead_oak.png — 1157×1179 px
+- vegetation_02_twisted_elm.png — 837×972 px
+- vegetation_03_lightning_split_tree.png — 804×1134 px
+- vegetation_04_small_thorn_tree.png — 445×681 px
+- vegetation_05_diseased_oak.png — 1091×1089 px
+- vegetation_06_charred_tree.png — 646×1037 px
+- vegetation_07_mossy_twisted_tree.png — 1083×1097 px
+- vegetation_08_fallen_dead_tree.png — 1124×843 px
+- vegetation_09_broken_stump.png — 603×742 px
+- vegetation_10_hollow_log_mushrooms.png — 1333×613 px
+- vegetation_11_uprooted_roots.png — 799×607 px
+- vegetation_12_dead_thorn_bush.png — 705×606 px
+- vegetation_13_withered_ferns.png — 866×669 px
+- vegetation_14_withered_reeds.png — 480×519 px
+
+03 Roads
+- road_01_muddy_straight_narrow.png — 1024×1536 px
+- road_02_muddy_straight_variant.png — 1024×1536 px
+- road_03_muddy_straight_wide.png — 1254×1254 px
+- road_04_muddy_horizontal.png — 1254×1254 px
+- road_05_muddy_corner.png — 1254×1254 px
+- road_06_muddy_t_junction.png — 1254×1254 px
+- road_07_muddy_crossroads.png — 1254×1254 px
+
+04 Props
+- prop_01_wooden_barrel.png — 572×714 px
+- prop_02_wooden_crate.png — 649×732 px
+- prop_03_burlap_sacks.png — 893×808 px
+- prop_04_lantern_post.png — 393×872 px
+- prop_05_low_wooden_barricade.png — 893×441 px

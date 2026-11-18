@@ -1,0 +1,26 @@
+MIREGRAVE HAMLET ASSET LICENSE — VERSION 1.0
+
+Copyright © 2026 Azwhod. All rights reserved except for the permissions granted below.
+
+PERMITTED USE
+
+You may use these assets in personal and commercial games, applications, videos,
+streams and other rendered or interactive media. You may crop, recolor, resize,
+animate and otherwise modify the assets for use inside those projects. Attribution
+is not required, but “Miregrave Hamlet Asset Pack by Azwhod” is appreciated.
+
+PROHIBITED USE
+
+You may not sell, share, upload or redistribute the original files, modified files,
+or substantially similar derivatives as standalone assets, stock media, templates,
+NFT collections or another asset pack. You may not make the source files available
+in a form that lets end users extract them for reuse. You may not use these files to
+train, fine-tune, benchmark or build a generative-AI dataset or model. You may not
+register an individual asset as a trademark or claim exclusive ownership of the
+underlying unmodified artwork.
+
+WARRANTY
+
+The assets are provided “as is,” without warranty. The creator is not responsible
+for losses resulting from their use. This license does not override any disclosure
+or compliance obligations imposed by a marketplace, platform or local law.

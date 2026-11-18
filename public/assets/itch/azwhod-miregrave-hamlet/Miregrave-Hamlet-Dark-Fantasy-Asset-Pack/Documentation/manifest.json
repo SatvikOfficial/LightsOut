@@ -1,0 +1,499 @@
+{
+  "version": "1.0",
+  "assets": [
+    {
+      "file": "01_Buildings/building_01_log_cabin.png",
+      "width": 736,
+      "height": 870,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 496710,
+      "sha256": "e4b4ca29098de5a25c89cbc8706653b95cf6782fe9e129de390529f8857d56a2"
+    },
+    {
+      "file": "01_Buildings/building_02_red_roof_cabin.png",
+      "width": 1035,
+      "height": 1002,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 748611,
+      "sha256": "d937642eab8b449f63ee43e55be3533af6f54ff6827d201d2c8733a7fd4f8c8c"
+    },
+    {
+      "file": "01_Buildings/building_03_dark_timber_cabin.png",
+      "width": 986,
+      "height": 945,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 709056,
+      "sha256": "0a877406f64a2d7102343cc01321fec9774ac32c8994aefae448aeb01a97e3b2"
+    },
+    {
+      "file": "01_Buildings/building_04_elevated_wood_hut.png",
+      "width": 748,
+      "height": 1109,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 653266,
+      "sha256": "27e4055e645e84591606e9b1329316d36e336a359a53ca78f3312b8be8035d75"
+    },
+    {
+      "file": "01_Buildings/building_05_ruined_cottage.png",
+      "width": 831,
+      "height": 933,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 595493,
+      "sha256": "29ee3b7237b276a76701f4593d79e7224a91b761c62d638c5dc3e76ea741c2fc"
+    },
+    {
+      "file": "01_Buildings/building_06_tall_gothic_house.png",
+      "width": 866,
+      "height": 1186,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 730838,
+      "sha256": "8b1a601356ba76e8929ca71356d60b0e1eefc2e1e9cd6ae5b8504bbb97c13e22"
+    },
+    {
+      "file": "01_Buildings/building_07_large_gothic_house.png",
+      "width": 1183,
+      "height": 867,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 694712,
+      "sha256": "20001be8484cbd9a60dae2da8dab561b86b3708d04e1f89c7759dbcf1c2bfb6e"
+    },
+    {
+      "file": "01_Buildings/building_08_red_roof_house.png",
+      "width": 1067,
+      "height": 977,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 787338,
+      "sha256": "cdd5bb32fe8f9e96d9fa982ec5e4438e0d6193f0c3ef96f60e9f85e0c8bcc1dd"
+    },
+    {
+      "file": "01_Buildings/building_09_plaster_poor_house.png",
+      "width": 787,
+      "height": 1201,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 746960,
+      "sha256": "a4f92eb1050dccfeca82dd9e2238e86a3963be933d81a315cdc4dc9def695b02"
+    },
+    {
+      "file": "01_Buildings/building_10_tall_poor_house.png",
+      "width": 936,
+      "height": 1116,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 822081,
+      "sha256": "bb7585cf9ce96ed2bd2a2505f4d11ca514183387b48f90d692bb2bc37536df4a"
+    },
+    {
+      "file": "01_Buildings/building_11_long_poor_house.png",
+      "width": 1161,
+      "height": 772,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 690016,
+      "sha256": "266b25b1b99077b2887b6195e1726be0de3485acc74f9317cb56c8d7ef81c6aa"
+    },
+    {
+      "file": "01_Buildings/building_12_red_roof_poor_house.png",
+      "width": 1007,
+      "height": 827,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 620616,
+      "sha256": "6d348790f651654904076bc79a8fbb334831abeb48934abc3e0d327035424931"
+    },
+    {
+      "file": "02_Vegetation/vegetation_01_ancient_dead_oak.png",
+      "width": 1157,
+      "height": 1179,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 472932,
+      "sha256": "8edddc3196f91d9aeb55244ca350b47f0a3a7028961db32027d66437cf483987"
+    },
+    {
+      "file": "02_Vegetation/vegetation_02_twisted_elm.png",
+      "width": 837,
+      "height": 972,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 153120,
+      "sha256": "98a4f829eb0a726aa9ea0145d39135765788bf1b022afb1a7ead21cf891fc253"
+    },
+    {
+      "file": "02_Vegetation/vegetation_03_lightning_split_tree.png",
+      "width": 804,
+      "height": 1134,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 363185,
+      "sha256": "91edba769144c5ee6dc941587156c48446494a1227691b117c6298f7ec1c902f"
+    },
+    {
+      "file": "02_Vegetation/vegetation_04_small_thorn_tree.png",
+      "width": 445,
+      "height": 681,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 83428,
+      "sha256": "fb670a18837999dd29fbe5b007a64eb66822dfdfe5824524b8c667b67a7f12ff"
+    },
+    {
+      "file": "02_Vegetation/vegetation_05_diseased_oak.png",
+      "width": 1091,
+      "height": 1089,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 416538,
+      "sha256": "deec09b41df41df7ecff0cfcfeab9dd0b93b9522792e76b0dcb8f5009b2b3ab1"
+    },
+    {
+      "file": "02_Vegetation/vegetation_06_charred_tree.png",
+      "width": 646,
+      "height": 1037,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 245422,
+      "sha256": "4c9b7c9b497c01ae381b52f9917f452d49ac13473d1a4478e38f6c9120664b95"
+    },
+    {
+      "file": "02_Vegetation/vegetation_07_mossy_twisted_tree.png",
+      "width": 1083,
+      "height": 1097,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 546963,
+      "sha256": "e737a5a359736461d8bd23321721c16cb9b4bc742d2c82faf8d4596321c9413c"
+    },
+    {
+      "file": "02_Vegetation/vegetation_08_fallen_dead_tree.png",
+      "width": 1124,
+      "height": 843,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 264082,
+      "sha256": "5099e3d681419b2ccad8cfaf576e168c6e4d9692424ade1f0a747d1ee45a5852"
+    },
+    {
+      "file": "02_Vegetation/vegetation_09_broken_stump.png",
+      "width": 603,
+      "height": 742,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 234984,
+      "sha256": "98a00fe3df8ef42029a76a90ebe0f46f081b32875f28783fc6d0eb72c22b39da"
+    },
+    {
+      "file": "02_Vegetation/vegetation_10_hollow_log_mushrooms.png",
+      "width": 1333,
+      "height": 613,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 483154,
+      "sha256": "47e3d47bf29cb2fb0bf2d6bea1a480ab84fd53ccea97dddbe06dd1041856ddf8"
+    },
+    {
+      "file": "02_Vegetation/vegetation_11_uprooted_roots.png",
+      "width": 799,
+      "height": 607,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 264431,
+      "sha256": "e20ff9300f48e98876243e0e39b4aa0edee6a255932c036290827ce905b2fb2e"
+    },
+    {
+      "file": "02_Vegetation/vegetation_12_dead_thorn_bush.png",
+      "width": 705,
+      "height": 606,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 176556,
+      "sha256": "9483fe159d2a88319bb2f1d4acd286a252917fb11869500ee17502b9aec878d7"
+    },
+    {
+      "file": "02_Vegetation/vegetation_13_withered_ferns.png",
+      "width": 866,
+      "height": 669,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 312416,
+      "sha256": "646d6f44580e4e817f17f722855b3aa805973281cce17ed81c4f176a584aa9bc"
+    },
+    {
+      "file": "02_Vegetation/vegetation_14_withered_reeds.png",
+      "width": 480,
+      "height": 519,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 74882,
+      "sha256": "c1566fa6112f08a9aee7cd96cec4f6833d1ae5c5204cee5f6a8c814e4782bf9a"
+    },
+    {
+      "file": "03_Roads/road_01_muddy_straight_narrow.png",
+      "width": 1024,
+      "height": 1536,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 600496,
+      "sha256": "6e9c80b9f3679e421dbc8263c1243fd06972bf8457187403f62b8f81d6ea0c94"
+    },
+    {
+      "file": "03_Roads/road_02_muddy_straight_variant.png",
+      "width": 1024,
+      "height": 1536,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 599017,
+      "sha256": "32de7f2e7925920e403f8bb295cadb7ee6951a4d40d92af5fddd990eff52d576"
+    },
+    {
+      "file": "03_Roads/road_03_muddy_straight_wide.png",
+      "width": 1254,
+      "height": 1254,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 729794,
+      "sha256": "eec152a6202253de757f0c852ea811b3bdce788e1c71a935db3051e2275b1c97"
+    },
+    {
+      "file": "03_Roads/road_04_muddy_horizontal.png",
+      "width": 1254,
+      "height": 1254,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 520342,
+      "sha256": "c09d7c678c082e980e8832c043b6e07a0e88fc6a589a7db10a7d4483bb3bf04d"
+    },
+    {
+      "file": "03_Roads/road_05_muddy_corner.png",
+      "width": 1254,
+      "height": 1254,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 571467,
+      "sha256": "154ef002e5d7a9a290e6ae110e0cb57dd2bc610a597556ed55659f2041e7c9ea"
+    },
+    {
+      "file": "03_Roads/road_06_muddy_t_junction.png",
+      "width": 1254,
+      "height": 1254,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 504039,
+      "sha256": "5ed5c285f1514cbf2b78c01eb44e2173c54657806676a4d2c37df388de5a30d4"
+    },
+    {
+      "file": "03_Roads/road_07_muddy_crossroads.png",
+      "width": 1254,
+      "height": 1254,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 866694,
+      "sha256": "25e9131517ca5c30f6382abf49d4c4d9853b0b6b91aefc676b97ca3d36478708"
+    },
+    {
+      "file": "04_Props/prop_01_wooden_barrel.png",
+      "width": 572,
+      "height": 714,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 347300,
+      "sha256": "049e3ebee5df9f630fed3f7c4c4fd281012df799d90bbbd76d49f367dab4c0db"
+    },
+    {
+      "file": "04_Props/prop_02_wooden_crate.png",
+      "width": 649,
+      "height": 732,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 319293,
+      "sha256": "5ddfc03ff43313a3ec811e7337cdbac8f949e4a2ed29683869e9e4333db20ae4"
+    },
+    {
+      "file": "04_Props/prop_03_burlap_sacks.png",
+      "width": 893,
+      "height": 808,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 389615,
+      "sha256": "2d8e007555073a3469514bfdf29e82d331576e97f853a2d090793b7ee6b648ff"
+    },
+    {
+      "file": "04_Props/prop_04_lantern_post.png",
+      "width": 393,
+      "height": 872,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 172209,
+      "sha256": "2c9d5cc702c38f2aacd2b367a4035b4614369a4b5b6c2a28752ea609195cefdb"
+    },
+    {
+      "file": "04_Props/prop_05_low_wooden_barricade.png",
+      "width": 893,
+      "height": 441,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "hidden_transparent_rgb_pixels": 0,
+      "semi_transparent_pixels": 0,
+      "opaque_pixels": 283294,
+      "sha256": "ee4447581783d96a275d7bbf2e517ea86aba851c8e93f8544ccaf6c791a8392f"
+    }
+  ]
+}
